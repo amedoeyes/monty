@@ -1,0 +1,12 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug",
+      "type": "codelldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/monty",
+      "args": ["${workspaceFolder}/test.m"]
+    }
+  ]
+}
