@@ -1,6 +1,4 @@
-#include "deque.h"
-#include <stdio.h>
-#include <stdlib.h>
+#include "monty.h"
 
 /**
  * _deque_init_nodes - initializes deque nodes
@@ -89,6 +87,39 @@ int _deque_pop_front(void)
 		deque->head->prev = NULL;
 	else
 		deque->tail = NULL;
+
+	--deque->size;
+
+	free(temp);
+	return (data);
+}
+
+/**
+ * _deque_pop_back - removes data from the back of the deque
+ *
+ * Return: the data
+ */
+
+int _deque_pop_back(void)
+{
+	Deque *deque = _deque_get();
+	int data = 0;
+	DequeNode *temp = NULL;
+
+	if (deque_is_empty())
+	{
+		fprintf(stderr, "Error: deque is empty.\n");
+		exit(EXIT_FAILURE);
+	}
+
+	data = deque->tail->data;
+	temp = deque->tail;
+
+	deque->tail = deque->tail->prev;
+	if (deque->tail != NULL)
+		deque->tail->next = NULL;
+	else
+		deque->head = NULL;
 
 	--deque->size;
 

@@ -1,8 +1,4 @@
-#include "deque.h"
-#include "tokenizer.h"
-#include "tokens_handler.h"
-#include <stdio.h>
-#include <stdlib.h>
+#include "monty.h"
 
 /**
  * main - monty language interpreter
@@ -16,9 +12,7 @@
 int main(int argc, char **argv)
 {
 	FILE *file;
-	char *line = NULL;
-	size_t len = 0;
-	ssize_t read;
+	char line[256];
 
 	if (argc != 2)
 	{
@@ -33,21 +27,16 @@ int main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 
-	while ((read = getline(&line, &len, file)) != -1)
+	while (fgets(line, sizeof(line), file) != NULL)
 	{
 		Tokens tokens = tokenize(line);
 		static size_t line_number;
 
 		++line_number;
-
-		if (tokens == NULL)
-			continue;
-
 		handle_tokens(tokens, line_number);
 		free_tokens(tokens);
 	}
 
-	free(line);
 	fclose(file);
 	deque_free();
 

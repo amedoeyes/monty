@@ -1,8 +1,4 @@
-#include "instructions.h"
-#include "tokenizer.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "monty.h"
 
 /**
  * handle_tokens - handles tokens
@@ -13,21 +9,43 @@
 
 void handle_tokens(Tokens tokens, size_t line_number)
 {
-	Token op = tokens[0];
+	if (tokens == NULL || tokens[0][0] == '#')
+		return;
 
-	if (strcmp(op, "push") == 0)
+	if (strcmp(tokens[0], "push") == 0)
 		instruction_push(tokens, line_number);
-	else if (strcmp(op, "pall") == 0)
+	else if (strcmp(tokens[0], "pall") == 0)
 		instruction_pall();
-	else if (strcmp(op, "pint") == 0)
+	else if (strcmp(tokens[0], "pint") == 0)
 		instruction_pint(line_number);
-	else if (strcmp(op, "#") == 0)
-	{
-		return; /* you have to have braces here because betty is dumb... */
-	}
+	else if (strcmp(tokens[0], "pop") == 0)
+		instruction_pop(line_number);
+	else if (strcmp(tokens[0], "swap") == 0)
+		instruction_swap(line_number);
+	else if (strcmp(tokens[0], "add") == 0)
+		instruction_add(line_number);
+	else if (strcmp(tokens[0], "nop") == 0)
+		instruction_nop();
+	else if (strcmp(tokens[0], "sub") == 0)
+		instruction_sub(line_number);
+	else if (strcmp(tokens[0], "div") == 0)
+		instruction_div(line_number);
+	else if (strcmp(tokens[0], "mul") == 0)
+		instruction_mul(line_number);
+	else if (strcmp(tokens[0], "mod") == 0)
+		instruction_mod(line_number);
+	else if (strcmp(tokens[0], "pchar") == 0)
+		instruction_pchar(line_number);
+	else if (strcmp(tokens[0], "pstr") == 0)
+		instruction_pstr();
+	else if (strcmp(tokens[0], "rotl") == 0)
+		instruction_rotl();
+	else if (strcmp(tokens[0], "rotr") == 0)
+		instruction_rotr();
+	else if (strcmp(tokens[0], "stack") == 0)
+		instruction_stack();
+	else if (strcmp(tokens[0], "queue") == 0)
+		instruction_queue();
 	else
-	{
-		fprintf(stderr, "L%lu: unknown instruction %s\n", line_number, op);
-		exit(EXIT_FAILURE);
-	}
+		instruction_unknown(tokens, line_number);
 }

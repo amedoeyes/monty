@@ -1,7 +1,4 @@
-#include "tokenizer.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "monty.h"
 
 #define DELIM " \t\n"
 
@@ -22,7 +19,7 @@ static size_t token_count(const char *str)
 	if (str == NULL)
 		return (0);
 
-	copy = strdup(str);
+	copy = _strdup(str);
 	if (copy == NULL)
 	{
 		fprintf(stderr, "Error: strdup failed\n");
@@ -66,7 +63,7 @@ char **tokenize(const char *str)
 		exit(EXIT_FAILURE);
 	}
 
-	copy = strdup(str);
+	copy = _strdup(str);
 	if (copy == NULL)
 	{
 		fprintf(stderr, "Error: strdup failed\n");
@@ -76,7 +73,7 @@ char **tokenize(const char *str)
 	token = strtok(copy, DELIM);
 	for (i = 0; i < count; i++)
 	{
-		tokens[i] = strdup(token);
+		tokens[i] = _strdup(token);
 		if (tokens[i] == NULL)
 		{
 			fprintf(stderr, "Error: strdup failed\n");

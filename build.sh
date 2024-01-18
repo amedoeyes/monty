@@ -1,7 +1,7 @@
 #!/bin/bash
 
 command=gcc
-flags=("-Wall" "-Werror" "-Wextra" "-pedantic" "-std=gnu89" "-ggdb")
+flags=("-Wall" "-Werror" "-Wextra" "-pedantic" "-std=c89" "-ggdb")
 files=(./*.c)
 out_dir="./build"
 exec_name="monty"

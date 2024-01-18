@@ -1,61 +1,59 @@
-#include "deque.h"
-#include <stdio.h>
-#include <stdlib.h>
+#include "monty.h"
 
 /**
- * deque_is_empty - checks if deque is empty
+ * deque_push_front - adds data to the front of the deque
  *
- * Return: true if deque is empty, false otherwise
+ * @data: data to add
  */
 
-bool deque_is_empty(void)
+void deque_push_front(int data)
 {
-	return (_deque_get()->size == 0);
+	_deque_push_front(data);
 }
 
 /**
- * deque_push - adds data to deque
+ * deque_push_back - adds data to the back of the deque
+ *
+ * @data: data to add
+ */
+
+void deque_push_back(int data)
+{
+	_deque_push_back(data);
+}
+
+/**
+ * deque_push - adds data to deque based on mode
  *
  * @data: data to add
  */
 
 void deque_push(int data)
 {
-	if (_deque_get()->mode == DEQUE_STACK)
-		_deque_push_front(data);
+	if (deque_get_mode() == DEQUE_STACK)
+		deque_push_front(data);
 	else
-		_deque_push_back(data);
+		deque_push_back(data);
 }
 
 /**
- * deque_pop - removes data from deque
+ * deque_pop_front - removes data from the front of the deque
  *
  * Return: the data
  */
 
-int deque_pop(void)
+int deque_pop_front(void)
 {
 	return (_deque_pop_front());
 }
 
 /**
- * deque_peek - get the data of the top of the deque
+ * deque_pop_back - removes data from the back of the deque
  *
  * Return: the data
  */
 
-int deque_peek(void)
+int deque_pop_back(void)
 {
-	return (_deque_get()->head->data);
-}
-
-/**
- * deque_set_mode - sets the mode of the deque
- *
- * @mode: DEQUE_STACK or DEQUE_QUEUE
- */
-
-void deque_set_mode(DequeMode mode)
-{
-	_deque_get()->mode = mode;
+	return (_deque_pop_back());
 }
